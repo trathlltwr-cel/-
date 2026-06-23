@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دعوات | صياغة ذهب فاخرة</title>
+<meta name="description" content="دعوات — محل ذهب ومجوهرات فاخرة. تصفّح المجموعة، وشاهد كل قطعة من كل الزوايا.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ====================== TOKENS ====================== */
+:root{
+  --ink:#15100D;
+  --ink-2:#211A14;
+  --ink-3:#2C2218;
+  --line:rgba(201,162,75,.18);
+  --cream:#F3E9D7;
+  --cream-dim:#C9BCA4;
+  --gold:#C9A24B;
+  --gold-light:#EBCD80;
+  --gold-dim:#8A6A3D;
+  --garnet:#9C3A47;
+  --r:22px;
+  --r-sm:12px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --shadow:0 20px 50px -20px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--cream);
+  font-family:'Tajawal',sans-serif;
+  font-weight:400;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.disp{font-family:'Aref Ruqaa',serif;font-weight:700;letter-spacing:.01em;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+img,svg{display:block;}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px;border-radius:4px;}
+.container{width:100%;max-width:1180px;margin:0 auto;padding:0 22px;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.78rem;letter-spacing:.14em;color:var(--gold-light);
+  font-weight:700;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 30px;border-radius:999px;font-weight:700;font-size:.95rem;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s;
+  white-space:nowrap;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-dim));
+  color:#1A1209;box-shadow:0 14px 30px -10px rgba(201,162,75,.55);
+}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 36px -10px rgba(201,162,75,.7);}
+.btn-ghost{
+  border:1px solid var(--line);color:var(--cream);background:rgba(243,233,215,.03);
+}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(201,162,75,.08);transform:translateY(-3px);}
+.btn-wa svg{width:18px;height:18px;}
+.section{padding:96px 0;position:relative;}
+.section-head{max-width:560px;margin-bottom:54px;}
+.section-head h2{font-size:clamp(2rem,4vw,2.7rem);margin:0 0 14px;color:var(--cream);}
+.section-head p{color:var(--cream-dim);font-size:1rem;margin:0;}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ====================== DECORATIVE DIVIDER ====================== */
+.divider{display:flex;align-items:center;justify-content:center;gap:14px;padding:6px 0;opacity:.7;}
+.divider svg{width:120px;height:18px;color:var(--gold);}
+.divider span{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+
+/* ====================== ANNOUNCEMENT BAR ====================== */
+.announce{
+  background:var(--ink-3);color:var(--gold-light);
+  font-size:.78rem;text-align:center;padding:9px 14px;
+  border-bottom:1px solid var(--line);letter-spacing:.02em;
+}
+
+/* ====================== NAV ====================== */
+header.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(21,16,13,.7);backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s,background .4s;
+}
+header.nav.scrolled{border-color:var(--line);background:rgba(21,16,13,.92);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.5rem;color:var(--cream);}
+.logo svg{width:38px;height:38px;}
+.nav-links{display:none;align-items:center;gap:34px;font-weight:500;font-size:.95rem;}
+.nav-links a{position:relative;color:var(--cream-dim);transition:color .3s;}
+.nav-links a:hover{color:var(--gold-light);}
+.nav-links a::after{
+  content:"";position:absolute;right:0;left:0;bottom:-8px;height:1px;background:var(--gold);
+  transform:scaleX(0);transition:transform .35s var(--ease);
+}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{display:none;}
+.nav-toggle{display:flex;flex-direction:column;gap:5px;padding:8px;}
+.nav-toggle span{width:24px;height:2px;background:var(--cream);border-radius:2px;transition:.3s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{
+  max-height:0;overflow:hidden;transition:max-height .4s var(--ease);
+  background:var(--ink-2);border-bottom:1px solid var(--line);
+}
+.mobile-menu.open{max-height:340px;}
+.mobile-menu ul{list-style:none;margin:0;padding:14px 22px 22px;display:flex;flex-direction:column;gap:16px;}
+.mobile-menu a{font-size:1.05rem;color:var(--cream-dim);}
+@media (min-width:880px){
+  .nav-links{display:flex;}
+  .nav-cta{display:inline-flex;}
+  .nav-toggle{display:none;}
+}
+
+/* ====================== HERO ====================== */
+.hero{position:relative;padding:74px 0 90px;text-align:center;overflow:hidden;}
+.hero::before{
+  content:"";position:absolute;inset:-20% -10% auto -10%;height:130%;
+  background:radial-gradient(closest-side,rgba(201,162,75,.16),transparent 70%);
+  pointer-events:none;
+}
+.seal-wrap{display:flex;justify-content:center;margin-bottom:18px;}
+.seal{width:120px;height:120px;animation:sealIn 1.1s var(--ease) both;}
+@keyframes sealIn{from{opacity:0;transform:scale(.4) rotate(-25deg);}to{opacity:1;transform:scale(1) rotate(0);}}
+.hero h1{
+  font-size:clamp(3rem,9vw,5.4rem);margin:6px 0 10px;color:var(--cream);
+  opacity:0;animation:fadeUp .9s var(--ease) .35s both;
+}
+.hero .tagline{
+  max-width:480px;margin:0 auto 34px;color:var(--cream-dim);font-size:1.08rem;
+  opacity:0;animation:fadeUp .9s var(--ease) .55s both;
+}
+.hero .actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;opacity:0;animation:fadeUp .9s var(--ease) .75s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.trust-row{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:34px;margin-top:54px;
+  opacity:0;animation:fadeUp .9s var(--ease) .95s both;
+}
+.trust-item{display:flex;align-items:center;gap:10px;color:var(--cream-dim);font-size:.88rem;}
+.trust-item svg{width:20px;height:20px;color:var(--gold);}
+
+/* ====================== FILTERS + GRID ====================== */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px;}
+.filter-btn{
+  padding:9px 20px;border-radius:999px;border:1px solid var(--line);
+  color:var(--cream-dim);font-size:.86rem;font-weight:700;transition:.3s;
+}
+.filter-btn:hover{color:var(--gold-light);border-color:var(--gold);}
+.filter-btn.active{background:var(--gold);color:#1A1209;border-color:var(--gold);}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+@media (min-width:680px){.grid{grid-template-columns:repeat(3,1fr);}}
+@media (min-width:1000px){.grid{grid-template-columns:repeat(4,1fr);}}
+.card{
+  background:linear-gradient(165deg,var(--ink-3),var(--ink-2));
+  border:1px solid var(--line);border-radius:var(--r);padding:18px 16px 20px;
+  display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s;
+}
+.card[hidden]{display:none;}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--gold-dim);}
+.card-stage{
+  position:relative;aspect-ratio:1/1;border-radius:var(--r-sm);
+  background:radial-gradient(circle at 50% 38%,rgba(201,162,75,.16),transparent 70%);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;cursor:pointer;
+}
+.card-stage svg{width:62%;height:62%;color:var(--gem,var(--garnet));filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));transition:transform .5s var(--ease);}
+.card:hover .card-stage svg{transform:scale(1.08) rotate(-4deg);}
+.spin-badge{
+  position:absolute;bottom:8px;left:8px;display:flex;align-items:center;gap:5px;
+  font-size:.66rem;font-weight:700;letter-spacing:.03em;color:var(--gold-light);
+  background:rgba(21,16,13,.7);border:1px solid var(--line);border-radius:999px;padding:4px 9px;
+}
+.spin-badge svg{width:11px;height:11px;}
+.card h3{font-size:1.05rem;margin:0 0 6px;color:var(--cream);}
+.card .meta{display:flex;gap:12px;font-size:.78rem;color:var(--cream-dim);margin-bottom:6px;}
+.card .price-note{font-size:.74rem;color:var(--gold-dim);margin-bottom:14px;}
+.card .card-actions{display:flex;gap:8px;margin-top:auto;}
+.card .card-actions .btn{flex:1;padding:10px 12px;font-size:.78rem;}
+
+/* ====================== 3D VIEWER MODAL ====================== */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(10,8,6,.78);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:18px;
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease);z-index:100;
+}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal{
+  width:100%;max-width:480px;background:linear-gradient(165deg,var(--ink-3),var(--ink-2));
+  border:1px solid var(--line);border-radius:28px;padding:26px 22px 28px;
+  transform:scale(.92) translateY(10px);transition:transform .4s var(--ease);box-shadow:var(--shadow);
+  max-height:92vh;overflow:auto;
+}
+.modal-overlay.open .modal{transform:scale(1) translateY(0);}
+.modal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+.modal-top h3{font-size:1.3rem;margin:0;color:var(--cream);}
+.modal-close{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s;}
+.modal-close:hover{border-color:var(--gold);color:var(--gold-light);}
+.modal-close svg{width:15px;height:15px;}
+.viewer-stage{
+  perspective:1100px;height:260px;display:flex;align-items:center;justify-content:center;
+  margin:14px 0 6px;touch-action:pan-y;user-select:none;-webkit-user-select:none;
+  position:relative;overflow:hidden;border-radius:18px;
+  background:radial-gradient(circle at 50% 40%,rgba(201,162,75,.14),transparent 72%);
+}
+.viewer-stage:active{cursor:grabbing;}
+.viewer-stage{cursor:grab;}
+.viewer-inner{width:64%;height:64%;transform-style:preserve-3d;will-change:transform;}
+.viewer-inner svg{width:100%;height:100%;color:var(--gem,var(--garnet));filter:drop-shadow(0 14px 22px rgba(0,0,0,.5));}
+.viewer-sheen{
+  position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.55;
+  background:linear-gradient(var(--sheen-angle,75deg),transparent 38%,rgba(255,246,222,.5) 50%,transparent 62%);
+  transform:translateX(var(--sheen-x,0%));
+}
+.viewer-hint{display:flex;align-items:center;justify-content:center;gap:8px;font-size:.78rem;color:var(--cream-dim);margin-bottom:18px;}
+.viewer-hint svg{width:15px;height:15px;color:var(--gold);}
+.modal .meta{display:flex;gap:16px;font-size:.84rem;color:var(--cream-dim);margin-bottom:4px;}
+.modal .price-note{font-size:.78rem;color:var(--gold-dim);margin-bottom:18px;}
+.modal .btn{width:100%;}
+
+/* ====================== STORY ====================== */
+.story{display:grid;gap:40px;}
+.story blockquote{
+  font-family:'Aref Ruqaa',serif;font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.8;
+  color:var(--gold-light);margin:0 0 22px;padding-right:22px;border-right:2px solid var(--gold);
+}
+.story p{color:var(--cream-dim);}
+.story-stats{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap;}
+.story-stats div strong{display:block;font-size:1.8rem;color:var(--gold-light);font-family:'Aref Ruqaa',serif;}
+.story-stats div span{font-size:.8rem;color:var(--cream-dim);}
+@media (min-width:900px){.story{grid-template-columns:1.1fr .9fr;align-items:center;}}
+.story-visual{
+  position:relative;border-radius:28px;overflow:hidden;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--ink-3),var(--ink-2));
+  min-height:280px;display:flex;align-items:center;justify-content:center;
+}
+.story-visual svg{width:55%;color:var(--gold);opacity:.9;}
+
+/* ====================== CONTACT ====================== */
+.contact-wrap{display:grid;gap:34px;}
+@media (min-width:900px){.contact-wrap{grid-template-columns:1fr 1fr;}}
+.info-card{
+  border:1px solid var(--line);border-radius:var(--r);padding:26px;
+  background:linear-gradient(165deg,var(--ink-3),var(--ink-2));
+}
+.info-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px;}
+.info-row svg{width:20px;height:20px;color:var(--gold);flex-shrink:0;margin-top:3px;}
+.info-row strong{display:block;color:var(--cream);margin-bottom:3px;font-size:.92rem;}
+.info-row span,.info-row a{color:var(--cream-dim);font-size:.88rem;}
+.social-row{display:flex;gap:12px;margin-top:18px;}
+.social-row a{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:.3s;}
+.social-row a:hover{border-color:var(--gold);color:var(--gold-light);}
+.social-row svg{width:17px;height:17px;}
+.form-card{border:1px solid var(--line);border-radius:var(--r);padding:26px;background:linear-gradient(165deg,var(--ink-3),var(--ink-2));}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:.82rem;color:var(--cream-dim);margin-bottom:7px;}
+.field input,.field textarea{
+  width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--line);
+  background:rgba(0,0,0,.18);color:var(--cream);font-family:inherit;font-size:.92rem;resize:vertical;
+}
+.field input:focus,.field textarea:focus{border-color:var(--gold);}
+.form-card .btn{width:100%;margin-top:6px;}
+
+/* ====================== FOOTER ====================== */
+footer{border-top:1px solid var(--line);padding:38px 0 30px;text-align:center;color:var(--cream-dim);font-size:.84rem;}
+footer .logo{justify-content:center;margin-bottom:10px;}
+footer .logo svg{width:30px;height:30px;}
+
+/* ====================== WHATSAPP FAB ====================== */
+.wa-fab{
+  position:fixed;bottom:22px;left:22px;z-index:55;width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -8px rgba(201,162,75,.6);
+  animation:pulseFab 2.6s ease-in-out infinite;
+}
+.wa-fab svg{width:27px;height:27px;color:#1A1209;}
+@keyframes pulseFab{0%,100%{box-shadow:0 14px 30px -8px rgba(201,162,75,.6);}50%{box-shadow:0 14px 30px -8px rgba(201,162,75,.95),0 0 0 8px rgba(201,162,75,.12);}}
+
+@media (max-width:520px){
+  .section{padding:70px 0;}
+  .story blockquote{padding-right:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG SPRITE: GRADIENTS + ICONS (no visual output on its own) ===== -->
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EBCD80"/>
+      <stop offset="50%" stop-color="#C9A24B"/>
+      <stop offset="100%" stop-color="#8A6A3D"/>
+    </linearGradient>
+
+    <symbol id="icon-ring" viewBox="0 0 100 100">
+      <path fill-rule="evenodd" d="M50 92a34 34 0 1 0 0-68 34 34 0 1 0 0 68Zm0-12a22 22 0 1 1 0-44 22 22 0 1 1 0 44Z" fill="url(#goldGrad)"/>
+      <path d="M50 16 56 28 50 31 44 28Z" fill="url(#goldGrad)"/>
+      <circle cx="50" cy="18" r="9" fill="currentColor"/>
+      <path d="M45 14 47 11 M55 14 53 11" stroke="#fff" stroke-opacity=".5" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-necklace" viewBox="0 0 100 100">
+      <path d="M14 18c0 38 24 50 36 50s36-12 36-50" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="50" cy="58" r="5" fill="url(#goldGrad)"/>
+      <path d="M50 62 60 78a11.5 11.5 0 1 1 -20 0Z" fill="currentColor"/>
+      <path d="M44 70 46 67" stroke="#fff" stroke-opacity=".5" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-bracelet" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="56" rx="37" ry="23" fill="none" stroke="url(#goldGrad)" stroke-width="9"/>
+      <circle cx="50" cy="33" r="6" fill="currentColor"/>
+      <circle cx="27" cy="48" r="4" fill="currentColor" opacity=".75"/>
+      <circle cx="73" cy="48" r="4" fill="currentColor" opacity=".75"/>
+    </symbol>
+
+    <symbol id="icon-earring" viewBox="0 0 100 100">
+      <path d="M42 18a12 12 0 1 1 17 17" fill="none" stroke="url(#goldGrad)" stroke-width="4.5" stroke-linecap="round"/>
+      <line x1="59" y1="35" x2="59" y2="56" stroke="url(#goldGrad)" stroke-width="3"/>
+      <path d="M59 56 70 74a12.5 12.5 0 1 1 -22 0Z" fill="currentColor"/>
+      <path d="M52 66 54 63" stroke="#fff" stroke-opacity=".5" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-seal" viewBox="0 0 100 100">
+      <circle cx="50" cy="46" r="38" fill="url(#goldGrad)"/>
+      <circle cx="50" cy="46" r="38" fill="none" stroke="#1A1209" stroke-opacity=".25" stroke-width="2" stroke-dasharray="3 5"/>
+      <text x="50" y="62" text-anchor="middle" font-family="Aref Ruqaa, serif" font-size="46" fill="#1A1209" font-weight="700">د</text>
+      <path d="M22 78c4 10 0 16-6 20M78 78c-4 10 0 16 6 20M40 84c2 9-2 14-8 17M60 84c-2 9 2 14 8 17" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-rotate" viewBox="0 0 24 24">
+      <path d="M4 12a8 8 0 0 1 14-5.2M20 12a8 8 0 0 1-14 5.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M18 4v4h-4M6 20v-4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-gem" viewBox="0 0 24 24">
+      <path d="M4 9 12 3l8 6-8 12Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M4 9h16M9 9l3 12 3-12" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+      <path d="M12 3 20 6v6c0 5-4 8-8 9-4-1-8-4-8-9V6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-hand" viewBox="0 0 24 24">
+      <path d="M7 21c-2-2-3-5-3-8V7a1.5 1.5 0 0 1 3 0v5M7 7V4a1.5 1.5 0 0 1 3 0v6M10 6a1.5 1.5 0 0 1 3 0v5M13 7a1.5 1.5 0 0 1 3 0v6c0 1 0 3-1 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-wa" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z" fill="currentColor"/>
+      <path d="M8.5 8.3c.2-.6.7-.6 1.1-.6h.5c.2 0 .5 0 .7.5l.7 1.6c.1.3 0 .5-.2.7l-.5.5c-.2.2-.1.5 0 .7.5.9 1.4 1.8 2.3 2.3.2.1.5.2.7 0l.5-.5c.2-.2.4-.3.7-.2l1.6.7c.5.2.5.5.5.7v.5c0 .4 0 .9-.6 1.1-1.6.6-3.6-.1-5.4-1.9-1.8-1.8-2.5-3.8-1.9-5.4Z" fill="#1A1209"/>
+    </symbol>
+
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M12 7v5l4 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24">
+      <path d="M12 21s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="12" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="icon-divider" viewBox="0 0 120 18">
+      <path d="M0 9h36M84 9h36" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M44 9c0-5 6-8 16-8s16 3 16 8-6 8-16 8-16-3-16-8Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="60" cy="9" r="3" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-insta" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-tiktok" viewBox="0 0 24 24">
+      <path d="M14 3v10.5a3.2 3.2 0 1 1-2.6-3.1M14 3a5 5 0 0 0 5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-fb" viewBox="0 0 24 24">
+      <path d="M14 21v-7h2.5l.5-3H14V9c0-1 .3-1.7 1.8-1.7H17V4.3C16.6 4.2 15.6 4 14.4 4 12 4 10.3 5.4 10.3 8v3H8v3h2.3v7Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="announce">الأسعار تُحدَّث يوميًا حسب سعر الذهب العالمي · استفسار وحجز عبر واتساب</div>
+
+<header class="nav" id="siteNav">
+  <div class="container nav-inner">
+    <a href="#" class="logo"><svg><use href="#icon-seal"/></svg> دعوات</a>
+    <nav class="nav-links">
+      <a href="#collection">المجموعة</a>
+      <a href="#story">قصتنا</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+    <a class="btn btn-gold nav-cta" id="navWaBtn" target="_blank" rel="noopener">
+      <svg><use href="#icon-wa"/></svg> واتساب
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#collection">المجموعة</a></li>
+      <li><a href="#story">قصتنا</a></li>
+      <li><a href="#contact">تواصل معنا</a></li>
+      <li><a class="btn btn-gold" id="navWaBtnMobile" target="_blank" rel="noopener"><svg><use href="#icon-wa"/></svg> واتساب</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="seal-wrap"><svg class="seal"><use href="#icon-seal"/></svg></div>
+    <h1>دعوات</h1>
+    <p class="tagline">صياغة ذهبية تُروى في كل دعوة — اكتشف القطعة، وأدرها بين يديك على الشاشة قبل أن تراها في يدك.</p>
+    <div class="actions">
+      <a href="#collection" class="btn btn-gold">استعرض المجموعة</a>
+      <a href="#contact" class="btn btn-ghost">تواصل معنا</a>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><svg><use href="#icon-gem"/></svg> عيار 18 و21</div>
+      <div class="trust-item"><svg><use href="#icon-shield"/></svg> ضمان وفاتورة رسمية</div>
+      <div class="trust-item"><svg><use href="#icon-hand"/></svg> صياغة يدوية</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg><use href="#icon-divider"/></svg></div>
+
+<section class="section" id="collection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">المجموعة</span>
+      <h2>كل قطعة، من كل زاوية</h2>
+      <p>اضغط على أي تصميم لتدويره يمينًا وشمالًا، وكأنك تتأمله في يدك.</p>
+    </div>
+
+    <div class="filters reveal" role="tablist" aria-label="تصفية حسب الفئة">
+      <button class="filter-btn active" data-filter="all">الكل</button>
+      <button class="filter-btn" data-filter="ring">خواتم</button>
+      <button class="filter-btn" data-filter="necklace">عقود</button>
+      <button class="filter-btn" data-filter="bracelet">أسوار</button>
+      <button class="filter-btn" data-filter="earring">أقراط</button>
+    </div>
+
+    <div class="grid reveal" id="productGrid"></div>
+  </div>
+</section>
+
+<div class="divider"><svg><use href="#icon-divider"/></svg></div>
+
+<section class="section" id="story">
+  <div class="container story reveal">
+    <div>
+      <span class="eyebrow">قصتنا</span>
+      <blockquote>"الذهب الذي نصوغه لا يُقاس بالجرام وحده، بل بالمناسبة التي يُروى فيها."</blockquote>
+      <p>في دعوات، كل قطعة تبدأ من فكرة قبل أن تبدأ من معدن: دعوة زفاف، مولود، عهد، أو يوم تستحق أن يُخلَّد. نجمع بين الصياغة التقليدية والتفاصيل الدقيقة، ونختار كل عيار وقَيراط بعناية لتبقى القطعة جزءًا من الذكرى لا مجرد حليّ.</p>
+      <div class="story-stats">
+        <div><strong>21 و18</strong><span>عيار متوفر</span></div>
+        <div><strong>صياغة</strong><span>يدوية بالكامل</span></div>
+        <div><strong>ضمان</strong><span>وفاتورة لكل قطعة</span></div>
+      </div>
+    </div>
+    <div class="story-visual"><svg><use href="#icon-seal"/></svg></div>
+  </div>
+</section>
+
+<div class="divider"><svg><use href="#icon-divider"/></svg></div>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">تواصل معنا</span>
+      <h2>استفسر أو احجز قطعتك</h2>
+      <p>راسلنا عبر واتساب، أو اترك بياناتك وسنعاود التواصل معك.</p>
+    </div>
+
+    <div class="contact-wrap reveal">
+      <div class="info-card">
+        <div class="info-row">
+          <svg><use href="#icon-wa"/></svg>
+          <div><strong>واتساب</strong><span id="phoneDisplay">+249 9XX XXX XXX</span></div>
+        </div>
+        <div class="info-row">
+          <svg><use href="#icon-pin"/></svg>
+          <div><strong>الموقع</strong><span>الخرطوم، السوق العربي — يُحدَّد لاحقًا</span></div>
+        </div>
+        <div class="info-row">
+          <svg><use href="#icon-clock"/></svg>
+          <div><strong>ساعات العمل</strong><span>يوميًا 9 صباحًا – 9 مساءً، الجمعة عصرًا</span></div>
+        </div>
+        <div class="social-row">
+          <a href="#" aria-label="إنستقرام دعوات"><svg><use href="#icon-insta"/></svg></a>
+          <a href="#" aria-label="تيك توك دعوات"><svg><use href="#icon-tiktok"/></svg></a>
+          <a href="#" aria-label="فيسبوك دعوات"><svg><use href="#icon-fb"/></svg></a>
+        </div>
+      </div>
+
+      <form class="form-card" id="contactForm">
+        <div class="field">
+          <label for="cName">الاسم</label>
+          <input id="cName" required placeholder="اسمك الكامل">
+        </div>
+        <div class="field">
+          <label for="cPhone">رقم الهاتف</label>
+          <input id="cPhone" required placeholder="09XXXXXXXX" inputmode="tel">
+        </div>
+        <div class="field">
+          <label for="cMsg">رسالتك</label>
+          <textarea id="cMsg" rows="3" placeholder="أخبرنا عن القطعة التي تبحث عنها..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold">
+          <svg><use href="#icon-wa"/></svg> إرسال عبر واتساب
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="#" class="logo"><svg><use href="#icon-seal"/></svg> دعوات</a>
+    <p>صياغة ذهب فاخرة، تُروى في كل دعوة.</p>
+    <p>© 2026 دعوات. جميع الحقوق محفوظة.</p>
+  </div>
+</footer>
+
+<a class="wa-fab" id="fabWa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <svg><use href="#icon-wa"/></svg>
+</a>
+
+<!-- ===== PRODUCT VIEWER MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-top">
+      <h3 id="modalTitle">اسم المنتج</h3>
+      <button class="modal-close" id="modalClose" aria-label="إغلاق"><svg><use href="#icon-x"/></svg></button>
+    </div>
+    <div class="viewer-stage" id="viewerStage">
+      <div class="viewer-sheen" id="viewerSheen"></div>
+      <div class="viewer-inner" id="viewerInner">
+        <svg id="viewerIcon"><use href="#icon-ring"/></svg>
+      </div>
+    </div>
+    <div class="viewer-hint"><svg><use href="#icon-rotate"/></svg> اسحب يمينًا أو شمالًا لتدوير القطعة</div>
+    <div class="meta">
+      <span id="modalKarat">عيار 21</span>
+      <span id="modalWeight">5.2 جم</span>
+    </div>
+    <p class="price-note">السعر يُحدَّد حسب سعر الذهب اليوم — استفسر للحصول على السعر الحالي.</p>
+    <a class="btn btn-gold" id="modalWaBtn" target="_blank" rel="noopener">
+      <svg><use href="#icon-wa"/></svg> استفسار عن هذه القطعة
+    </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============ تعديل بياناتك هنا ============ */
+  // غيّر رقم الواتساب إلى رقم محلك الحقيقي بصيغة دولية بدون + أو أصفار، مثال: 249912345678
+  var WHATSAPP_NUMBER = "249912345678";
+
+  function formatPhone(n){
+    var s = n.replace(/^249/, "");
+    return "+249 " + s.slice(0,2) + " " + s.slice(2,5) + " " + s.slice(5);
+  }
+  document.querySelectorAll("#phoneDisplay").forEach(function(el){ el.textContent = formatPhone(WHATSAPP_NUMBER); });
+
+  function waLink(message){
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  }
+  var defaultMsg = "السلام عليكم، أحببت الاستفسار عن مجموعة دعوات للذهب.";
+  ["navWaBtn","navWaBtnMobile","fabWa"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.href = waLink(defaultMsg);
+  });
+
+  /* ============ بيانات المنتجات ============ */
+  var PRODUCTS = [
+    {id:1, name:"خاتم العروس الذهبي", cat:"ring", icon:"icon-ring", karat:"عيار 21", weight:"5.2 جم", gem:"#9C3A47"},
+    {id:2, name:"خاتم اللمسة الفرنسية", cat:"ring", icon:"icon-ring", karat:"عيار 18", weight:"3.8 جم", gem:"#3D6E8C"},
+    {id:3, name:"عقد قطرة الذهب", cat:"necklace", icon:"icon-necklace", karat:"عيار 21", weight:"12.4 جم", gem:"#9C3A47"},
+    {id:4, name:"عقد جوهرة الليل", cat:"necklace", icon:"icon-necklace", karat:"عيار 21", weight:"15.0 جم", gem:"#3D6E8C"},
+    {id:5, name:"سوار النخلة", cat:"bracelet", icon:"icon-bracelet", karat:"عيار 21", weight:"9.6 جم", gem:"#C9772F"},
+    {id:6, name:"سوار اللؤلؤ الذهبي", cat:"bracelet", icon:"icon-bracelet", karat:"عيار 18", weight:"7.3 جم", gem:"#E9DEC4"},
+    {id:7, name:"أقراط الهلال", cat:"earring", icon:"icon-earring", karat:"عيار 21", weight:"4.1 جم", gem:"#3D6E8C"},
+    {id:8, name:"أقراط نجمة الصحراء", cat:"earring", icon:"icon-earring", karat:"عيار 18", weight:"3.5 جم", gem:"#C9772F"}
+  ];
+
+  var grid = document.getElementById("productGrid");
+  PRODUCTS.forEach(function(p){
+    var card = document.createElement("article");
+    card.className = "card";
+    card.dataset.cat = p.cat;
+    card.innerHTML =
+      '<div class="card-stage" style="--gem:'+p.gem+'" tabindex="0" role="button" aria-label="عرض ' + p.name + ' بشكل ثلاثي الأبعاد">' +
+        '<svg><use href="#' + p.icon + '"/></svg>' +
+        '<span class="spin-badge"><svg><use href="#icon-rotate"/></svg> عرض 360°</span>' +
+      '</div>' +
+      '<h3>' + p.name + '</h3>' +
+      '<div class="meta"><span>' + p.karat + '</span><span>' + p.weight + '</span></div>' +
+      '<div class="price-note">السعر حسب سعر اليوم</div>' +
+      '<div class="card-actions">' +
+        '<button class="btn btn-ghost btn-view">عرض 360°</button>' +
+        '<a class="btn btn-gold btn-wa" target="_blank" rel="noopener"><svg><use href="#icon-wa"/></svg> استفسار</a>' +
+      '</div>';
+    var waBtn = card.querySelector(".btn-wa");
+    waBtn.href = waLink("السلام عليكم، أحببت الاستفسار عن: " + p.name);
+    card.querySelector(".card-stage").addEventListener("click", function(){ openModal(p); });
+    card.querySelector(".card-stage").addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); openModal(p); }
+    });
+    card.querySelector(".btn-view").addEventListener("click", function(){ openModal(p); });
+    grid.appendChild(card);
+  });
+
+  /* ============ تصفية الفئات ============ */
+  document.querySelectorAll(".filter-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll(".filter-btn").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      var f = btn.dataset.filter;
+      grid.querySelectorAll(".card").forEach(function(c){
+        c.hidden = !(f === "all" || c.dataset.cat === f);
+      });
+    });
+  });
+
+  /* ============ القائمة المتنقلة ============ */
+  var navToggle = document.getElementById("navToggle");
+  var mobileMenu = document.getElementById("mobileMenu");
+  navToggle.addEventListener("click", function(){
+    var open = mobileMenu.classList.toggle("open");
+    navToggle.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", open);
+  });
+  mobileMenu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){ mobileMenu.classList.remove("open"); navToggle.classList.remove("open"); });
+  });
+
+  /* ============ شريط التنقل عند التمرير ============ */
+  var nav = document.getElementById("siteNav");
+  window.addEventListener("scroll", function(){
+    nav.classList.toggle("scrolled", window.scrollY > 30);
+  }, {passive:true});
+
+  /* ============ ظهور تدريجي عند التمرير ============ */
+  var reveals = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {threshold:.15});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* ============ نافذة العارض ثلاثي الأبعاد ============ */
+  var overlay = document.getElementById("modalOverlay");
+  var modalTitle = document.getElementById("modalTitle");
+  var modalKarat = document.getElementById("modalKarat");
+  var modalWeight = document.getElementById("modalWeight");
+  var modalWaBtn = document.getElementById("modalWaBtn");
+  var viewerIcon = document.getElementById("viewerIcon");
+  var viewerInner = document.getElementById("viewerInner");
+  var viewerStage = document.getElementById("viewerStage");
+  var viewerSheen = document.getElementById("viewerSheen");
+  var lastFocused = null;
+
+  var rot = 0, vel = 0, dragging = false, lastX = 0, lastT = 0, rafId = null, idleTimer = null;
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function applyRot(deg){
+    rot = deg;
+    viewerInner.style.transform = "rotateY(" + rot + "deg)";
+    var sheenX = ((rot % 360) / 360) * 140 - 30;
+    viewerSheen.style.setProperty("--sheen-x", sheenX + "%");
+    viewerSheen.style.setProperty("--sheen-angle", (60 + (rot % 90) * .3) + "deg");
+  }
+
+  function openModal(p){
+    lastFocused = document.activeElement;
+    modalTitle.textContent = p.name;
+    modalKarat.textContent = p.karat;
+    modalWeight.textContent = p.weight;
+    viewerIcon.innerHTML = '<use href="#' + p.icon + '"></use>';
+    viewerInner.style.color = p.gem;
+    modalWaBtn.href = waLink("السلام عليكم، أحببت الاستفسار عن: " + p.name);
+    overlay.classList.add("open");
+    applyRot(0);
+    startIdle();
+    document.getElementById("modalClose").focus();
+    document.body.style.overflow = "hidden";
+  }
+  function closeModal(){
+    overlay.classList.remove("open");
+    stopIdle();
+    document.body.style.overflow = "";
+    if(lastFocused) lastFocused.focus();
+  }
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  overlay.addEventListener("click", function(e){ if(e.target === overlay) closeModal(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && overlay.classList.contains("open")) closeModal(); });
+
+  function startIdle(){
+    if(reducedMotion) return;
+    stopIdle();
+    idleTimer = setTimeout(function(){
+      function step(){
+        applyRot(rot + 0.25);
+        idleTimer = requestAnimationFrame(step);
+      }
+      idleTimer = requestAnimationFrame(step);
+    }, 1400);
+  }
+  function stopIdle(){
+    clearTimeout(idleTimer);
+    cancelAnimationFrame(idleTimer);
+  }
+
+  function momentumLoop(){
+    if(Math.abs(vel) < 0.02){ vel = 0; startIdle(); return; }
+    applyRot(rot + vel);
+    vel *= 0.94;
+    rafId = requestAnimationFrame(momentumLoop);
+  }
+
+  function pointerDown(e){
+    dragging = true;
+    stopIdle();
+    cancelAnimationFrame(rafId);
+    lastX = (e.touches ? e.touches[0].clientX : e.clientX);
+    lastT = Date.now();
+    viewerStage.style.cursor = "grabbing";
+  }
+  function pointerMove(e){
+    if(!dragging) return;
+    var x = (e.touches ? e.touches[0].clientX : e.clientX);
+    var now = Date.now();
+    var dx = x - lastX;
+    var dt = Math.max(now - lastT, 1);
+    applyRot(rot + dx * 0.6);
+    vel = (dx * 0.6) / (dt / 16);
+    lastX = x; lastT = now;
+  }
+  function pointerUp(){
+    if(!dragging) return;
+    dragging = false;
+    viewerStage.style.cursor = "grab";
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(momentumLoop);
+  }
+
+  viewerStage.addEventListener("mousedown", pointerDown);
+  window.addEventListener("mousemove", pointerMove);
+  window.addEventListener("mouseup", pointerUp);
+  viewerStage.addEventListener("touchstart", pointerDown, {passive:true});
+  viewerStage.addEventListener("touchmove", pointerMove, {passive:true});
+  viewerStage.addEventListener("touchend", pointerUp);
+
+  /* ============ نموذج التواصل -> واتساب ============ */
+  document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("cName").value.trim();
+    var phone = document.getElementById("cPhone").value.trim();
+    var msg = document.getElementById("cMsg").value.trim();
+    var text = "السلام عليكم، اسمي " + name + " (هاتف: " + phone + ").\n" + (msg || "أحببت الاستفسار عن مجموعة دعوات للذهب.");
+    window.open(waLink(text), "_blank");
+  });
+
+})();
+</script>
+</body>
+</html>
